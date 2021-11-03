@@ -10,4 +10,11 @@ Compile Contracts:
 Run tests:
 ```npx hardhat test```
 
+Custom tasks:
+
+Get a list of all Signer addresses:
+```npx hardhat accounts```
+
+Get a list of all named Signer addresses:
+```npx hardhat namedAccounts```
 
