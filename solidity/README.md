@@ -3,6 +3,7 @@ Solidity:
 Setup:
 
 First copy the example environment file to .env
+    
     cp .env.example .env
 
 Generate a new mnemonic to use for testing and assign it to MNEMONIC in .env
