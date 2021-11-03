@@ -193,3 +193,4 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 
 # yarn v2
+artifacts
