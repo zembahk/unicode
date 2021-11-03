@@ -64,15 +64,15 @@ const config: HardhatUserConfig = {
         runs: 800,
       },
     },
-	},
-    networks: {
-      hardhat: {
-        accounts: {
-          mnemonic 
-        },
+  },
+  networks: {
+    hardhat: {
+      accounts: {
+        mnemonic 
       },
     },
-	namedAccounts: {
+  },
+  namedAccounts: {
     deployer: 0,
     owner: 1,
     recipient: 2,
