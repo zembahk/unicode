@@ -76,7 +76,7 @@ const config: HardhatUserConfig = {
   },
 	namedAccounts: {
 	deployer: 0,
-    diamondOwner: 1,
+    owner: 1,
     recipient: 2,
     test1: 3,
     test2: 4,
