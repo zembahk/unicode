@@ -51,7 +51,6 @@ const config: HardhatUserConfig = {
   },
   solidity: {
     version: "0.8.0",
-
     settings: {
       metadata: {
         // Not including the metadata hash
@@ -66,15 +65,15 @@ const config: HardhatUserConfig = {
       },
     },
 	},
-  networks: {
-    hardhat: {
-      accounts: {
-        mnemonic 
+    networks: {
+      hardhat: {
+        accounts: {
+          mnemonic 
+        },
       },
     },
-  },
 	namedAccounts: {
-	deployer: 0,
+    deployer: 0,
     owner: 1,
     recipient: 2,
     test1: 3,
