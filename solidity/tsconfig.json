@@ -5,8 +5,8 @@
     "strict": true,
     "esModuleInterop": true,
     "outDir": "dist",
-		"resolveJsonModule": true,
-		"types": ["jest", "node", "jasmine", "mocha"]
+    "resolveJsonModule": true,
+    "types": ["jest", "node", "jasmine", "mocha"]
   },
   "include": ["./scripts", "./test", "./typechain"],
   "exclude": [ "dist", "node_modules" ],
