@@ -17,7 +17,7 @@ contract Chipper {
     function getPrice(address tokenA, address tokenB) public {
         string memory nameA = IERC20Metadata(tokenA).name();
         string memory nameB = IERC20Metadata(tokenB).name();
-        address pair = IUniswapV2Factory(0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f).getPair(tokenA, tokenB);
+        address pair = IUniswapV2Factory(address(0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f)).getPair(tokenA, tokenB);
         require(pair != address(0x0), "Invalid pair specified");
         (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast) = IUniswapV2Pair(pair).getReserves();
 
