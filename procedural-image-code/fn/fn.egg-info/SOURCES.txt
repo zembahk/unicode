@@ -1,0 +1,14 @@
+README.md
+setup.py
+fn/__init__.py
+fn/files.py
+fn/fn.py
+fn/git.py
+fn/utils.py
+fn.egg-info/PKG-INFO
+fn.egg-info/SOURCES.txt
+fn.egg-info/dependency_links.txt
+fn.egg-info/entry_points.txt
+fn.egg-info/requires.txt
+fn.egg-info/top_level.txt
+fn.egg-info/zip-safe
