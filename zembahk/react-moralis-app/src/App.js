@@ -5,60 +5,84 @@ import { contractAbi, CONTRACT_ADDRESS } from "./abi.js";
 import React, { useState } from 'react';
 
 //placeholder code
-const loadImage = () =>
-  fetch("https://js3d87qgmd.execute-api.us-east-1.amazonaws.com/test/helloworld")
-    .then(res => (res.ok ? res : Promise.reject(res)))
-    .then(res => console.log(res));
-// loadImage();
+
+const requestOptions = {
+  body: "{}",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded"
+  },
+  method: "POST",
+  mode: 'cors',
+};
+//fetch('http://localhost:9000/2015-03-31/functions/function/invocations', requestOptions)
+ // .then(response => response.json())
+ // .then(data => console.log(data));
+
 
 
 
 function Form() {
-  const [tokenAddress, setAddress] = useState(''); 
+
+  const [tokenAddress, setAddress] = useState('');
   const [tokenAmount, setAmount] = useState(''); // '' is the initial state value
+  const { user, web3 } = useMoralis();
+
   function handleSubmit(e) {
     e.preventDefault();
     console.log('You clicked submit.');
     console.log(tokenAddress);
     console.log(tokenAmount);
-    //SendTx(tokenAddress, tokenAmount);
+    SendTx(user, web3, tokenAddress, tokenAmount);
   }
+
 
   return (
     <form onSubmit={handleSubmit}>
       <p></p>
       <label>Please specify:</label>
-      <input type="text" name="address" placeholder=" contract address" value={tokenAddress} onInput={e => setAddress(e.target.value)}/>
+      <input type="text" name="address" placeholder=" contract address" value={tokenAddress} onInput={e => setAddress(e.target.value)} />
       <br></br>
       <label>Please specify:</label>
-      <input type="number" name="amount" placeholder=" amount to burn" value={tokenAmount} onInput={e => setAmount(e.target.value)}/>
+      <input type="number" name="amount" placeholder=" amount to burn" value={tokenAmount} onInput={e => setAmount(e.target.value)} />
       <br></br>
       <button class="button" type="submit">Submit</button>
     </form>
   );
 }
 
-function SendTx(token_type, token_amount) {
-  const {user, web3} = useMoralis();
+function SendTx(user, web3, token_type, token_amount) {
+ 
   const contract = new web3.eth.Contract(contractAbi, CONTRACT_ADDRESS);
   const address = user.get("ethAddress");
-  
-  contract.methods.chipper(address, token_type, token_amount).send({from: address, value: 0})
+
+  contract.methods.chipper(address, token_type, token_amount).send({ from: address, value: 0 })
     .on('transactionHash', (tx) => {
-        console.log('transactionHash', tx)
+      console.log('transactionHash', tx)
     })
     .on('error', (error, receipt) => {
-        console.log('Error - Receipt', error, receipt);
+      console.log('Error - Receipt', error, receipt);
     })
-    .on("receipt", function(receipt){ console.log(receipt); });
+    .on("receipt", function (receipt) { console.log(receipt); });
+
+
+  /* code for storing a file
+  const base64 = "V29ya2luZyBhdCBQYXJzZSBpcyBncmVhdCE=";
+  const exampleFile = new useMoralis().File("myfile.txt", { base64: base64 });
+  exampleFile.save().then(function() {
+    // The file has been saved to Moralis.
+    alert("Successfully Saved File To Moralis")
+  }, function(error) {
+    // The file either could not be read, or could not be saved to Moralis.
+    alert("Failed to Save to Moralis Server")
+  }); */
 
 }
 
 
 function App() {
-  const { authenticate, isAuthenticated, user, logout, 
+  const { authenticate, isAuthenticated, user, logout,
     enableWeb3, web3, isWeb3Enabled, isWeb3EnableLoading, web3EnableError } = useMoralis();
-if (!isAuthenticated && !isWeb3EnableLoading) {
+  if (!isAuthenticated && !isWeb3EnableLoading) {
     return (
       <div className="App">
         <header className="App-header">
@@ -67,11 +91,11 @@ if (!isAuthenticated && !isWeb3EnableLoading) {
           <div>
             <button class="button authenticateButton" onClick={() => authenticate()}>Authenticate</button>
           </div>
-          
+
         </header>
       </div>
     );
-  } else if (isWeb3EnableLoading){
+  } else if (isWeb3EnableLoading) {
     return (
       <div>
         Loading Web3...
@@ -85,13 +109,13 @@ if (!isAuthenticated && !isWeb3EnableLoading) {
         <img src={logo} className="App-logo" alt="logo" />
         <p></p>
         <div>
-        <button class="button logoutButton" onClick={() => logout()}>Log Out</button><p></p>
+          <button class="button logoutButton" onClick={() => logout()}>Log Out</button><p></p>
           <h2>Welcome user {user.get("username")}</h2>
           <h4>logged in with {user.get("ethAddress")}</h4></div>
 
         <div>Enter in Tokens to Chip</div>
         <Form />
-        
+
 
       </header>
     </div>
