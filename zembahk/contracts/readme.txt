@@ -1,2 +1,0 @@
-deployed on the polygon testnet mumbai using remix
-0x52Ae9173f3a3d5210720E09ae4932EB14f3CE3ac
