@@ -63,11 +63,11 @@ if (!isAuthenticated && !isWeb3EnableLoading) {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            <div>
-              <button class="button authenticateButton" onClick={() => authenticate()}>Authenticate</button>
-            </div>
-          </p>
+          <p></p>
+          <div>
+            <button class="button authenticateButton" onClick={() => authenticate()}>Authenticate</button>
+          </div>
+          
         </header>
       </div>
     );
@@ -83,15 +83,15 @@ if (!isAuthenticated && !isWeb3EnableLoading) {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          <div>
-          <button class="button logoutButton" onClick={() => logout()}>Log Out</button><p></p>
-            <h2>Welcome user {user.get("username")}</h2>
-            <h4>logged in with {user.get("ethAddress")}</h4></div>
+        <p></p>
+        <div>
+        <button class="button logoutButton" onClick={() => logout()}>Log Out</button><p></p>
+          <h2>Welcome user {user.get("username")}</h2>
+          <h4>logged in with {user.get("ethAddress")}</h4></div>
 
-          <div>Enter in Tokens to Chip</div>
-          <Form />
-        </p>
+        <div>Enter in Tokens to Chip</div>
+        <Form />
+        
 
       </header>
     </div>
