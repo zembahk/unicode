@@ -17,7 +17,7 @@ FRONT = [0,0,0,0.01]
 
 TWOPI = 2.0*pi
 
-SIZE = 1000
+SIZE = 5000
 PIX = 1.0/SIZE
 
 INUM = 1000
@@ -35,7 +35,7 @@ def spline_iterator():
   from modules.sandSpline import SandSpline
 
   splines = []
-  for _ in range(1):
+  for _ in range(30):
     guide = f(0.5,0.5)
     pnum = randint(15,100)
 
@@ -66,42 +66,29 @@ def main():
   from fn import Fn
   from sand import Sand
   from modules.helpers import get_colors
-  from base64 import b64encode
 
   sand = Sand(SIZE)
   sand.set_bg(BG)
   sand.set_rgba(FRONT)
 
-  colors = get_colors('./img/dark_cyan_white_black.gif')
+  colors = get_colors('../colors/dark_cyan_white_black2.gif')
   nc = len(colors)
 
   fn = Fn(prefix='./res/', postfix='.png')
   si = spline_iterator()
 
-  itt_max = 40000
-  itt = 0
-  output_file_name = fn.name()
   while True:
     try:
       itt, w, xy = next(si)
       rgba = colors[w%nc] + [0.0005]
       sand.set_rgba(rgba)
       sand.paint_dots(xy)
-      if itt == itt_max:
+      if not itt%(40000):
         print(itt)
-        sand.write_to_png(output_file_name, GAMMA)
-      # Ugly run-on code because the painting of the image happens
-      # sometime after the file is written, dunno why
-      if itt >= (itt_max + 40000):
-        file = open(output_file_name, 'rb')
-        file_data = file.read()
-        base64_bytes = b64encode(file_data)
-        base64_string = base64_bytes.decode('utf-8')
-        print(base64_string)
-
+        sand.write_to_png(fn.name(), GAMMA)
     except Exception as e:
       print(e)
-      # sand.write_to_png(fn.name(), GAMMA)
+      sand.write_to_png(fn.name(), GAMMA)
       traceback.print_exc(file=sys.stdout)
 
 

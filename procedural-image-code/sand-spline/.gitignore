@@ -4,5 +4,3 @@ res/*
 *.pyc
 build
 __pycache__
-.idea/
-
