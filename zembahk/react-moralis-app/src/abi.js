@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = "0x52Ae9173f3a3d5210720E09ae4932EB14f3CE3ac";
+export const CONTRACT_ADDRESS = "0xaB44E462F48a964690Ea39AcA36fFF5206170029";
 export const contractAbi = [
 	{
 		"inputs": [],
@@ -153,9 +153,9 @@ export const contractAbi = [
 			},
 			{
 				"indexed": false,
-				"internalType": "uint256",
-				"name": "token_type",
-				"type": "uint256"
+				"internalType": "address",
+				"name": "ERC20token",
+				"type": "address"
 			},
 			{
 				"indexed": false,
@@ -248,9 +248,9 @@ export const contractAbi = [
 				"type": "address"
 			},
 			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
+				"internalType": "address",
+				"name": "token",
+				"type": "address"
 			},
 			{
 				"internalType": "uint256",

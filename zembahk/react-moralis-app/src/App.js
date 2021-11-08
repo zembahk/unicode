@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { useMoralis, useMoralisWeb3Api } from "react-moralis";
+import { useMoralis, useWeb3ExecuteFunction } from "react-moralis";
 import { contractAbi, CONTRACT_ADDRESS } from "./abi.js";
 import React, { useState } from 'react';
 
@@ -19,20 +19,33 @@ const requestOptions = {
  // .then(data => console.log(data));
 
 
-
-
 function Form() {
 
   const [tokenAddress, setAddress] = useState('');
   const [tokenAmount, setAmount] = useState(''); // '' is the initial state value
-  const { user, web3 } = useMoralis();
-
+  const { user } = useMoralis();
+  //const contract = new web3.eth.Contract(contractAbi, CONTRACT_ADDRESS);
+  const address = user.get("ethAddress");
+  const { fetch } = useWeb3ExecuteFunction({
+      abi: contractAbi,
+      contractAddress: CONTRACT_ADDRESS,
+      functionName: "chipper",
+      params: {
+        account: address,
+        token: tokenAddress,
+        amount: tokenAmount
+      },
+    });
+    
+  //console.log(address);
   function handleSubmit(e) {
     e.preventDefault();
+    
     console.log('You clicked submit.');
     console.log(tokenAddress);
     console.log(tokenAmount);
-    SendTx(user, web3, tokenAddress, tokenAmount);
+    //SendTx(address, contract, tokenAddress, tokenAmount);
+
   }
 
 
@@ -45,16 +58,13 @@ function Form() {
       <label>Please specify:</label>
       <input type="number" name="amount" placeholder=" amount to burn" value={tokenAmount} onInput={e => setAmount(e.target.value)} />
       <br></br>
-      <button class="button" type="submit">Submit</button>
+      <button class="button" type="submit" onClick={() => fetch()} >Submit</button>
     </form>
   );
 }
 
-function SendTx(user, web3, token_type, token_amount) {
+function SendTx(address, contract, token_type, token_amount) {
  
-  const contract = new web3.eth.Contract(contractAbi, CONTRACT_ADDRESS);
-  const address = user.get("ethAddress");
-
   contract.methods.chipper(address, token_type, token_amount).send({ from: address, value: 0 })
     .on('transactionHash', (tx) => {
       console.log('transactionHash', tx)
@@ -89,7 +99,7 @@ function App() {
           <img src={logo} className="App-logo" alt="logo" />
           <p></p>
           <div>
-            <button class="button authenticateButton" onClick={() => authenticate()}>Authenticate</button>
+            <button class="button authenticateButton" enabled={isWeb3Enabled.toString()} onClick={() => authenticate()}>Authenticate</button>
           </div>
 
         </header>
