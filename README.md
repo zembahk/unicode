@@ -1,3 +1,12 @@
+<h2>
+Add a moralis node appId and serverUrl to the index.js
+Edit abi.js with the contract address and ABI code
+Edit App.js contract call
+</h2>
+
+
+
+
 <div align="center">
     <p align="center">
       <img src="./docs/head.png" alt="React Hook Form Logo - React hook custom hook for form validation" />
